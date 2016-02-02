@@ -24,7 +24,7 @@ void List<T>::pushBack(T newElem)
 {
 	if (first != NULL && last != NULL)
 	{
-		elem<Ò>* temp = new elem<Ò>;
+		elem<T>* temp = new elem<T>;
 		temp.data = newElem;
 		temp.prev = last;
 		temp.next = NULL;
@@ -35,7 +35,7 @@ void List<T>::pushBack(T newElem)
 	else
 	if (first == NULL)
 	{
-		elem<Ò>* temp = new elem<Ò>;
+		elem<T>* temp = new elem<T>;
 		temp.data = newElem;
 		first = temp;
 		first.next = NULL;
@@ -44,7 +44,7 @@ void List<T>::pushBack(T newElem)
 	else
 	if(first != NULL && last == NULL)
 	{
-		elem<Ò>* temp = new elem<Ò>;
+		elem<T>* temp = new elem<T>;
 		temp.data = newElem;
 		temp.prev = first;
 		temp.next = NULL;
