@@ -53,7 +53,19 @@ void List<T>::pushBack(T newElem)
 }
 
 template<typename T>
-int List<T>::size()
+void List<T>::popFront()
+{
+	if (start != NULL)
+	{
+		elem<T>* temp;
+		temp = start;
+		start = start->next;
+		delete start;
+	}
+}
+
+template<typename T>
+size_t List<T>::getSize() const
 {
 	int count = 0;
 	elem<T> *p = first;

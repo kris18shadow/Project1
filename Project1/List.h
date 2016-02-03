@@ -26,6 +26,6 @@ public:
 	elem<T>& operator[](size_t index);
 
 	void pushBack(T newElem);
-
-	int size();
+	void popFront();
+	size_t getSize() const;
 };
