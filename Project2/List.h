@@ -20,12 +20,14 @@ public:
 	List() :start(NULL), end(NULL) {};
 	~List();
 	List(List<T> const& other);
+
 	List& operator=(List const& other);
 	T& operator[](size_t index);
 
 	void pushBack(T newElem);
 	void popFront();
 	void delElem(size_t pos);
+	void delElement(T& elem);
 	size_t getSize() const;
 
 	void print() const;
@@ -146,7 +148,7 @@ void List<T>::popFront()
 		elem<T>* temp;
 		temp = start;
 		start = start->next;
-		delete start;
+		delete temp;
 	}
 }
 
@@ -163,7 +165,8 @@ void List<T>::delElem(size_t pos)
 	if (pos == 0)
 	{
 		start = start->next;
-		start->prev = NULL;
+		if(start != NULL)
+			start->prev = NULL;
 		delete temp;
 		return;
 	}
@@ -189,6 +192,68 @@ void List<T>::delElem(size_t pos)
 	tempNext->prev = tempPrev;	
 	
 	delete temp;
+}
+
+template<typename T>
+void List<T>::delElement(T& x)
+{
+	size_t currSize = getSize();
+
+	if (currSize == 0)
+		return;
+
+	elem<T>* temp = start;
+
+	//if it's the first element:
+	if (start->data == x)
+	{
+		start = start->next;
+		if (start != NULL)
+			start->prev = NULL;
+		delete temp;
+		return;
+	}
+
+	if (currSize == 1)
+		return;
+	//if pos is last element:
+	
+	if (end->data == x)
+	{
+		temp = end;
+		end = end->prev;
+		end->next = NULL;
+		delete temp;
+		return;
+	}
+
+	if (currSize > 0)
+	{		
+		for (size_t i = 0; i < currSize; i++)
+		{
+			if (temp->data == x)
+			{				
+				elem<T>* tempPrev = temp->prev;					
+				elem<T>* tempNext = NULL;
+
+				if (temp->next != NULL)
+				{
+					tempNext = temp->next;					
+				}
+				
+				tempPrev->next = tempNext;
+				if(tempNext != NULL)
+					tempNext->prev = tempPrev;
+
+				delete temp;
+			}
+			else
+			{
+				if(temp->next != NULL)
+					temp = temp->next;
+			}
+		}		
+	}
 }
 
 template<typename T>
@@ -221,7 +286,5 @@ void List<T>::print() const
 		std::cout << " {" << end->data << "} ";
 	}
 	else
-		return;
-
-	
+		return;	
 }

@@ -3,27 +3,57 @@
 
 int main()
 {
+	std::cout << "Capacity of memory is set to: " << CAPACITY << std::endl << std::endl;
+
 	MemoryAllocator allocator;
 	
-	//int *pArr1 = (int*)allocator.MyMalloc(100 * sizeof(int));
-	//int *pArr2 = (int*)allocator.MyMalloc(100 * sizeof(int));
-
-	List<int> test;
-
-	test.pushBack(1);//0
-	test.pushBack(2);//1
-	test.pushBack(3);//2
-	test.pushBack(4);//3
-	test.pushBack(5);//4
-	test.pushBack(6);//5
-
-	test.print();
+	std::cout << "INITIAL STATUS:\n";
+	allocator.printStatus();
+	std::cout << std::endl;
+	
+	///////////////////
+	//ALLOCATING:
+	//////////////////
+	std::cout << "--Atempting llocation of 8*sizeof(int):\n";
+	int *pArr1 = (int*)allocator.MyMalloc(8 * sizeof(int));
+	allocator.printStatus();
+	std::cout << std::endl;
+	
+	std::cout << "--Atempting Allocation of 2*sizeof(int):\n";
+	int *pArr2 = (int*)allocator.MyMalloc(2 * sizeof(int));
+	allocator.printStatus();
 	std::cout << std::endl;
 
-	test.delElem(3);
-
-	test.print();
+	std::cout << "--Atempting Allocation of 8*sizeof(int) (Must fail, because allocator is out of memory):\n";
+	int *pArr3 = (int*)allocator.MyMalloc(8 * sizeof(int));
+	allocator.printStatus();
 	std::cout << std::endl;
+	
+	///////////////////
+	//DELETING:
+	//////////////////
+	std::cout << "--DELETING:\n";
+
+	std::cout << "\n--Freeing first allocated block:\n";
+	allocator.MyFree((char*)pArr1);
+	allocator.printStatus();
+	std::cout << std::endl;
+
+	std::cout << "\n--Freeing second allocated block:\n";
+	allocator.MyFree((char*)pArr2);
+	allocator.printStatus();
+	std::cout << std::endl;
+
+	allocator.MyFree((char*)pArr3); 
+	allocator.printStatus();
+	std::cout << std::endl;
+	
+		
+	std::cout << "--Attempting to delete address which is not allocated by allocator:\n";
+	int x = 25;
+	int* parr5 = &x;
+	allocator.MyFree((char*)parr5);
+
 
 	return 0;
 }
