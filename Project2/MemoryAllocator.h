@@ -20,13 +20,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-const size_t CAPACITY = 64;
+//Size is of buffer set to 64 for testing:
 
 class MemoryAllocator
 {
 private:
 	//char because 1 char = 1 byte:
-	char buffer[CAPACITY];
+	char buffer[64];
 	List<List<char*>> sizeGroups;
 	List<char*> allocated;
 

@@ -50,7 +50,7 @@ bool MemoryAllocator::checkNextisAllocated(char* header)
 
 	int* nextHeader = (int*)(header + size + 4);
 
-	if (*nextHeader < CAPACITY - 4)
+	if (*nextHeader < 64 - 4)
 	{
 
 		if (*nextHeader % 4 != 0)
@@ -280,7 +280,7 @@ MemoryAllocator::MemoryAllocator()
 {
 	// Setting empty size:
 	int* temp = (int*)buffer;
-	*temp = CAPACITY - 4; //leave 4 bytes for header
+	*temp = 64 - 4; //leave 4 bytes for header
 
 	//Creating list of lists to group indexes of empty blocks by size:
 	List<char*>* noMoreThan4b = new List<char*>;
@@ -405,7 +405,7 @@ void MemoryAllocator::printStatus() const
 	std::cout << "Memory status: ";
 	std::cout << "||";
 
-	for (size_t i = 0; i < CAPACITY; i++)
+	for (size_t i = 0; i < 64; i++)
 	{
 		if (buffer[i] != char(204))
 		{

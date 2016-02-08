@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "Capacity of memory is set to: " << CAPACITY << std::endl << std::endl;
+	std::cout << "Capacity of memory is set to: 64" << std::endl << std::endl;
 
 	MemoryAllocator allocator;
 	
