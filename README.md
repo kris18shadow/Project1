@@ -10,7 +10,8 @@
   •	MyFree, която освобождава паметта заделена с MyMalloc.
   Сами можете да изберете типа на функциите и на техните параметри, например:
 
-  ```char* MyMalloc(size_t Size);
+  ```c++
+     char* MyMalloc(size_t Size);
      void MyFree(char* pBlock);
   ```
 
@@ -23,7 +24,8 @@
 достатъчно голям обем памет, от който да заделяте и в който да освобождавате необходимите на потребителя блокове.
 Ето пример за това как трябва да може да работят двете функции:
 
-  ```int *pArr1 = (int*) MyMalloc(100 * sizeof(int));
+  ```c++
+  int *pArr1 = (int*) MyMalloc(100 * sizeof(int));
   int *pArr2 = (int*) MyMalloc(100 * sizeof(int));
   pArr1[0] = pArr2[0] = 10;
   MyFree(pArr1);
